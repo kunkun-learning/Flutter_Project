@@ -45,13 +45,7 @@ class GameApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body: Sound(
-            child: Game(
-                child: KeyboardController(
-                    child: _HomePage()
-                )
-            )
-        ),
+        body: Sound(child: Game(child: KeyboardController(child: _HomePage()))),
       ),
     );
   }
@@ -92,29 +86,23 @@ class _MyHomePageState extends State<MyHomePage> {
   String username = "";
   String password = "";
 
-  void loginButton(){
+  void loginButton() {
     print("login");
 
-    if(username != "admin" || password != "123456"){
-
+    if (username != "admin" || password != "123456") {
       setState(() {
         isVis = true;
       });
       return;
     }
 
-    var result = Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context){
-        return GameApp();
-      })
-    );
+    var result = Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return GameApp();
+    }));
     print(result);
   }
 
-  void registerButton(){
-
-  }
+  void registerButton() {}
 
   @override
   Widget build(BuildContext context) {
@@ -122,56 +110,42 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body:Container(
-        decoration: BoxDecoration(
-          color: Colors.white
-        ),
+      body: Container(
+        decoration: BoxDecoration(color: Colors.white),
         child: Center(
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: 400
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Visibility(
-                    visible: isVis,
-                    child:Text("用户名或密码错误",
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 12
-                      ),
-                    ),
+            child: Container(
+          constraints: BoxConstraints(maxWidth: 400),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Visibility(
+                visible: isVis,
+                child: Text(
+                  "用户名或密码错误",
+                  style: TextStyle(color: Colors.redAccent, fontSize: 12),
                 ),
-                TextField(
-                  autofocus: true,
-                  decoration: InputDecoration(
-                      labelText: "用户名",
-                      hintText: "用户名或邮箱",
-                      prefixIcon: Icon(Icons.person)
-                  ),
-                  onChanged: (v)=>{
-                    username = v
-                  },
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      labelText: "密码",
-                      hintText: "您的登录密码",
-                      prefixIcon: Icon(Icons.lock)
-                  ),
-                  obscureText: true,
-                  onChanged: (v)=>{
-                    password = v
-                  },
-                ),
-                ElevatedButton(onPressed: loginButton, child: Text("登录")),
-                ElevatedButton(onPressed: registerButton, child: Text("注册"))
-
-              ],
-            ),
-          )
-        ),
+              ),
+              TextField(
+                autofocus: true,
+                decoration: InputDecoration(
+                    labelText: "用户名",
+                    hintText: "用户名或邮箱",
+                    prefixIcon: Icon(Icons.person)),
+                onChanged: (v) => {username = v},
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: "密码",
+                    hintText: "您的登录密码",
+                    prefixIcon: Icon(Icons.lock)),
+                obscureText: true,
+                onChanged: (v) => {password = v},
+              ),
+              ElevatedButton(onPressed: loginButton, child: Text("登录")),
+              ElevatedButton(onPressed: registerButton, child: Text("注册"))
+            ],
+          ),
+        )),
       ),
     );
   }
